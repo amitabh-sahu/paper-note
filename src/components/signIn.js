@@ -23,23 +23,23 @@ export default function SignIn() {
 
     return (
         <Box sx={{
-            fontSize: 'clamp(0.5rem, 0.5rem + 1vw, 1.2rem)',
+            fontSize: 'clamp(0.5rem, 0.25rem + 1vw, 1rem)',
             position: 'absolute',
             top: '50%', left: '50%',
             width: 'max-content',
             transform: 'translate(-50%, -50%)',
-            p : '1em 2em',
+            p: '1em 2em',
             backgroundColor: '#e1e1e1',
             borderRadius: 1,
             textAlign: 'center',
-            }}>
+        }}>
             <Box sx={{ display: 'flex', alignItems: 'end', m: '1em' }}>
                 <CardMedia component="img" src={logo} alt="app logo" sx={{ width: '5em' }} />
                 <Typography component="h1" sx={{ fontSize: '3em', color: '#546d79' }}>
                     Paper Note
                 </Typography>
             </Box>
-            <Button variant="contained" sx={{ fontSize: '1em', py: '1em', m: '1em' }} onClick={signIn}>
+            <Button variant="contained" sx={{ fontSize: '1em', py: 1, m: '1em' }} onClick={signIn}>
                 Sign In with google
             </Button>
         </Box>

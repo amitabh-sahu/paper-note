@@ -1,23 +1,24 @@
 import React from 'react';
 import Box from '@mui/material/Box';
+import { useLocation } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 import { Link } from "react-router-dom";
 
-
-function noMatch() {
+function NoMatch() {
+    const location = useLocation();
     return (
-        <Box sx={{ textAlign: 'center' }}>
-            <Typography component="h1" variant="h1">
+        <Box sx={{ textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <Typography component="h1" variant="h3">
                 404
             </Typography>
-            <Typography component="h1" variant="h3">
-                Page not found
+            <Typography component="h3" variant="h5">
+                Page not found. {location.pathname === '/fallout' ? 'Try again when connected to internet.' : ''}
             </Typography>
-            <Link to='/' style={{ fontSize: '1.5rem', textDecoration: 'none' }}>
+            <Link to='/' style={{ textDecoration: 'none' }}>
                 go to home
             </Link>
         </Box>
     );
 }
 
-export default noMatch;
+export default NoMatch;

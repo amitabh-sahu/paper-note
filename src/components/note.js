@@ -31,17 +31,17 @@ function Note({ id, note }) {
                     {note.text}
                 </Typography>
             </CardContent>
-            <CardActions sx={{ px: '16px', display: 'flex', justifyContent: 'space-between' }}>
-                <Typography color="text.secondary">
+            <CardActions>
+                <Typography color="text.secondary" variant="body2" sx={{flex: 1}}>
                     {new Date(note.timestamp?.toDate()).toLocaleString()}
                 </Typography>
                 <Box>
                     <Link to={`/edit/${id}`} style={{ textDecoration: 'none' }}>
-                        <IconButton>
+                        <IconButton aria-label="edit">
                             <EditIcon />
                         </IconButton>
                     </Link>
-                    <IconButton onClick={deleteNote}>
+                    <IconButton onClick={deleteNote} aria-label="delete">
                         <DeleteIcon />
                     </IconButton>
                 </Box>

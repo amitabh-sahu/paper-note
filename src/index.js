@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { StateProvider } from './context';
+import setupSW from './setupSW';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,4 +15,5 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
+setupSW();
 reportWebVitals();

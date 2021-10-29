@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { getFirestore, collection, onSnapshot, addDoc, setDoc, deleteDoc, doc, query, orderBy, serverTimestamp } from 'firebase/firestore';
+import { getAuth, signOut, signInWithPopup, onAuthStateChanged, GoogleAuthProvider } from 'firebase/auth';
+import { getFirestore, collection, onSnapshot, addDoc, setDoc, deleteDoc, doc, query, orderBy, serverTimestamp, enableIndexedDbPersistence } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyARC-d0PCMpyUom4OSxRWU6RtQhtLDcaZo",
@@ -14,10 +13,18 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-export { auth, provider, signInWithPopup };
+enableIndexedDbPersistence(db).catch((err) => {
+  if (err.code === 'failed-precondition') {
+    console.log('persistance failed');
+  }
+  else if (err.code === 'unimplemented') {
+    console.log('persistance is not available');
+  }
+});
+
+export { auth, provider, signOut, signInWithPopup, onAuthStateChanged };
 export { db, collection, onSnapshot, addDoc, setDoc, deleteDoc, doc, query, orderBy, serverTimestamp };

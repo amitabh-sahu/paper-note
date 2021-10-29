@@ -24,6 +24,10 @@ export default function MultilineTextFields() {
                 unsubscribe();
             }
         }
+        else {
+            setNoteTitle('');
+            setNoteText('');
+        }
     }, [noteId, user.uid]);
 
     const saveNote = () => {
@@ -37,8 +41,8 @@ export default function MultilineTextFields() {
         }
         else {
             addDoc(collection(doc(collection(db, 'users'), user.uid), 'notes'), (noteData));
-            history.push('/');
         }
+        history.push('/');
     };
 
     return (
