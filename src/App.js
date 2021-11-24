@@ -15,13 +15,17 @@ function App() {
   const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       dispatch({
         type: 'SET_USER',
         user: user,
       });
       setisLoading(false);
     });
+
+    return () => {
+      unsubscribe();
+    }
   }, []);
 
   return (

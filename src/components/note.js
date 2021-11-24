@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -11,14 +10,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { db, doc, deleteDoc, collection } from '../firebase';
 import { useStateValue } from '../context';
 import { Link } from "react-router-dom";
+import Modal from './Modal';
 
 function Note({ id, note }) {
     const [{ user }] = useStateValue();
+    const [showModal, setShowModal] = useState(false);
     const deleteNote = () => {
-        const confirmation = window.confirm('Are you sure you want to delete this note?');
-        if (confirmation) {
-            deleteDoc(doc(collection(doc(collection(db, 'users'), user.uid), 'notes'), id));
-        }
+        deleteDoc(doc(collection(doc(collection(db, 'users'), user.uid), 'notes'), id));
+        setShowModal(false);
     };
 
     return (
@@ -32,7 +31,7 @@ function Note({ id, note }) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Typography color="text.secondary" variant="body2" sx={{flex: 1}}>
+                <Typography color="text.secondary" variant="body2" sx={{ flex: 1 }}>
                     {new Date(note.timestamp?.toDate()).toLocaleString()}
                 </Typography>
                 <Box>
@@ -41,11 +40,12 @@ function Note({ id, note }) {
                             <EditIcon />
                         </IconButton>
                     </Link>
-                    <IconButton onClick={deleteNote} aria-label="delete">
+                    <IconButton onClick={() => setShowModal(true)} aria-label="delete">
                         <DeleteIcon />
                     </IconButton>
                 </Box>
             </CardActions>
+            <Modal visible={showModal} handleClose={() => setShowModal(false)} handleOK={deleteNote} />
         </Card>
     );
 }

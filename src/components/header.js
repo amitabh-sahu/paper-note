@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useStateValue } from '../context';
 import { auth, signOut } from '../firebase';
 
-export default function MenuAppBar() {
+function Header() {
     const [{ user }, dispatch] = useStateValue();
 
     const signOutHandler = () => {
@@ -33,10 +33,14 @@ export default function MenuAppBar() {
                     <AddIcon />
                 </IconButton>
             </Link>
-            <IconButton aria-label="sing out" onClick={signOutHandler}>
-                <LogoutIcon />
-            </IconButton>
+            <Link to='/' style={{ textDecoration: 'none' }}>
+                <IconButton aria-label="sing out" onClick={signOutHandler}>
+                    <LogoutIcon />
+                </IconButton>
+            </Link>
             <Avatar src={user.photoURL} alt={user.displayName} sx={{ bgcolor: '#3990d5', ml: 1 }} variant="rounded" />
         </Box>
     );
 }
+
+export default Header;

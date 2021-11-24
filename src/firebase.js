@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signOut, signInWithPopup, onAuthStateChanged, GoogleAuthProvider } from 'firebase/auth';
+import { getAuth, signOut, signInWithPopup, onAuthStateChanged, GoogleAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
 import { getFirestore, collection, onSnapshot, addDoc, setDoc, deleteDoc, doc, query, orderBy, serverTimestamp, enableIndexedDbPersistence } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -26,5 +26,5 @@ enableIndexedDbPersistence(db).catch((err) => {
   }
 });
 
-export { auth, provider, signOut, signInWithPopup, onAuthStateChanged };
+export { auth, provider, signOut, signInWithPopup, onAuthStateChanged, signInWithEmailAndPassword };
 export { db, collection, onSnapshot, addDoc, setDoc, deleteDoc, doc, query, orderBy, serverTimestamp };
